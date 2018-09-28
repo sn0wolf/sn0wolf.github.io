@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://snowolf.gitee.io/2018/09/27/hello-world/</loc>
+    
+    <lastmod>2018-09-28T10:48:38.667Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://snowolf.gitee.io/404.html</loc>
+    
+    <lastmod>2018-09-28T08:53:38.094Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://snowolf.gitee.io/top/index.html</loc>
     
     <lastmod>2018-09-28T07:57:38.192Z</lastmod>
@@ -26,13 +40,6 @@
     <loc>https://snowolf.gitee.io/tags/index.html</loc>
     
     <lastmod>2018-09-28T02:34:18.431Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://snowolf.gitee.io/2018/09/27/hello-world/</loc>
-    
-    <lastmod>2018-09-27T13:03:14.181Z</lastmod>
     
   </url>
   
