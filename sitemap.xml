@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://snowolf.gitee.io/about/index.html</loc>
+    
+    <lastmod>2018-09-28T02:34:44.162Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://snowolf.gitee.io/categories/index.html</loc>
     
-    <lastmod>2018-09-28T01:58:10.951Z</lastmod>
+    <lastmod>2018-09-28T02:34:36.240Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://snowolf.gitee.io/tags/index.html</loc>
     
-    <lastmod>2018-09-28T01:58:01.861Z</lastmod>
+    <lastmod>2018-09-28T02:34:18.431Z</lastmod>
     
   </url>
   
