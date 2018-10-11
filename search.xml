@@ -1,51 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[从Java 8 到Java 11：Java 新特性预览]]></title>
-    <url>%2F2018%2F09%2F30%2F1%2F</url>
-    <content type="text"><![CDATA[]]></content>
-      <categories>
-        <category>IT技术</category>
-        <category>Java</category>
-        <category>从Java 8 到Java 11</category>
-      </categories>
-      <tags>
-        <tag>IT技术</tag>
-        <tag>Java</tag>
-        <tag>新特性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[从Java 8 到Java 11 （语言篇）：二、Java的Http客户端]]></title>
-    <url>%2F2018%2F09%2F30%2F1%2F</url>
-    <content type="text"><![CDATA[]]></content>
-      <categories>
-        <category>IT技术</category>
-        <category>Java</category>
-        <category>从Java 8 到Java 11</category>
-      </categories>
-      <tags>
-        <tag>IT技术</tag>
-        <tag>Java</tag>
-        <tag>新特性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[从JDK 8 到JDK 11 （语言篇）：三、模块化系统]]></title>
-    <url>%2F2018%2F09%2F30%2F1%2F</url>
-    <content type="text"><![CDATA[]]></content>
-      <categories>
-        <category>IT技术</category>
-        <category>Java</category>
-        <category>从JDK 8 到JDK 11</category>
-      </categories>
-      <tags>
-        <tag>IT技术</tag>
-        <tag>Java</tag>
-        <tag>新特性</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[从Java 8 到Java 11 （语言篇）：一、局部变量类型接口]]></title>
     <url>%2F2018%2F09%2F30%2F1%2F</url>
     <content type="text"><![CDATA[&emsp;&emsp;局部变量类型接口是Java 10 为了提高代码的可读性而增加的一个语法糖。从网络调查的数据来看，这个新特性得到了广大开发者（74%）的认可。现在我们可以使用 var 替换局部变量声明时的类型部分，从而避免耗费精力去写出那些显而易见的类型。 什么是局部变量类型接口&emsp;&emsp;Java 10 采用了一个叫做 var 的保留类型来实现局部变量推断。在Java 10 之前，我们在定义局部变量的时候，必须要指定变量的具体类型: 1String text = "Hello Java 9"; 现在，可以使用var来代替具体的类型String。编译器将会根据上下文自动推断出变量的具体类型，那么上述代码可以修改为如下形式： 1var text = "Hello Java 10"; 值得特别注意的是，为了兼容旧版本，var 不是关键字，而是一个保留类型，也就意味着你仍然可以像这样用 var 为你的变量和函数命名： 1String var = "Hello Java"; &emsp;&emsp;与JavaScript等动态语言不同的是，Java中的 var 声明的变量仍旧是静态类型。你不能再次赋予另一个与原类型不符的变量值。 12var text = "Hello Java 10";text = 10; // Error：Type mismatch: cannot convert from int to String &emsp;&emsp;遗憾的是，Java 10 没有引入 Scala 和 Kotlin 中用于声明不可变变量的 val 关键字，而需要使用 final var 这种遗憾的语法来达到这个目的。 12final var text = "Hello Java 10";text = "Hello Java 11"; // Error：The final local variable text cannot be assigned. It must be blank and not using a compound assignment 局部变量类型接口的适用范围&emsp;&emsp;var 保留类型可以在定义如下类型的变量的时候使用。 字面量定义局部变量 123var list = new ArrayList&lt;String&gt;(); // infers ArrayList&lt;String&gt;var lst = new ArrayList&lt;&gt;();var text = "Hello Java 10"; 接收方法返回值定义局部变量 123var stream = list.stream(); // infers Stream&lt;String&gt;var path = Paths.get(fileName); // infers Pathvar bytes = Files.readAllBytes(path); // infers bytes[] 循环中定义局部变量 123List&lt;String&gt; lst = Arrays.asList("a", "b", "c");for (var element : lst) &#123;...&#125; // infers Stringfor (var counter = 0; counter &lt; lst.size(); counter++) &#123;...&#125; // infers int try-with-resources中定义的变量 12try (var input = new FileInputStream("validation.txt")) &#123;...&#125; // infers FileInputStream Lambda 表达式 &emsp;&emsp;这是Java 11 对var 保留类型的增强，为了代码的一致性，它允许在lamdba表达式中，声明隐式类型参数时使用var保留类型。例如，在Java 11之前，lamdba表达式需要只能这样写： 1BiFunction&lt;Integer, Integer, Integer&gt; fnc = (a, b) -&gt; a + b; 在 Java 11 和之后的版本，可以改写成这样： 1BiFunction&lt;Integer, Integer, Integer&gt; fnc = (var a,var b) -&gt; a + b; 需要注意的是，它不允许对lamdba表达式中的参数只有部分指定var保留类型，或者混合使用保留关键字和其他类型。 12fnc = (var a, b) -&gt; a + b; //ERROR: Syntax error on token "var"fnc = (var a, int b) -&gt; a + b; //ERROR: 'var' cannot be mixed with non-var parameters 局部变量类型接口的实现原理&emsp;&emsp;var其实就是 Java 10 增加的一种语法糖而已，在编译期间会自动推断实际类型，其编译后的字节码和实际类型一致，如以下所示： 12345public static void main(String[] args) &#123; String var = "Hello Java"; var text = "Hello Java 10"; System.out.println(var + "\n" + text);&#125; 其编译后的字节码如下： mark:3,512345678910111213141516171819public static void main(java.lang.String[]); Code: 0: ldc #16 // String Hello Java 2: astore_1 3: ldc #18 // String Hello Java 10 5: astore_2 6: getstatic #20 // Field java/lang/System.out:Ljava/io/PrintStream; 9: new #26 // class java/lang/StringBuilder 12: dup 13: aload_1 14: invokestatic #28 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String; 17: invokespecial #34 // Method java/lang/StringBuilder."&lt;init&gt;":(Ljava/lang/String;)V 20: ldc #37 // String \n 22: invokevirtual #39 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; 25: aload_2 26: invokevirtual #39 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; 29: invokevirtual #43 // Method java/lang/StringBuilder.toString:()Ljava/lang/String; 32: invokevirtual #47 // Method java/io/PrintStream.println:(Ljava/lang/String;)V 35: return 从上述代码的第3和5行可以看出，在编译后，虚拟机识别的仍是具体类型，而不是var类型。 局部变量类型接口的优缺点&emsp;&emsp;局部变量类型接口的引入，其最大的好处是简化了代码，增强了代码的可读性，让Java代码更加简洁。例如，在Java 10 之前，一般代码会写成这样： 123CopyOnWriteArrayList lst = new CopyOnWriteArrayList();ConcurrentModificationException cme = new ConcurrentModificationException();DefaultServiceUnavailableRetryStrategy strategy = new DefaultServiceUnavailableRetryStrategy(); 引入 var 保留类型后，我们可以将代码简化为这样： 123var lst = new CopyOnWriteArrayList();var cme = new ConcurrentModificationException();var strategy = new DefaultServiceUnavailableRetryStrategy(); &emsp;&emsp;由于变量的具体类型依赖编译器的推断，那么其明显的缺点掩盖了类型，特别是对于变量是某个方法的返回值的情况，如果不去看返回结果类型，那么不能清楚变量的具体类型。如下所示： 12var path = Paths.get(fileName); // infers Pathvar bytes = Files.readAllBytes(path); // infers bytes[] 因此，在编码定义变量的时候，一定需要定义可读性较强的变量名来避免使用var保留类型后，可读性降低的问题。]]></content>
